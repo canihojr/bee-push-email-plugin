@@ -1,0 +1,52 @@
+{
+  "name": "bee-push-email",
+  "version": "2.8.8",
+  "description": "Real-time IMAP IDLE email push notifications for OpenClaw with rule engine and guided setup wizard",
+  "type": "module",
+  "main": "./dist/index.js",
+  "openclaw": {
+    "extensions": [
+      "./src/index.ts"
+    ],
+    "skills": [
+      "./skills/bee-push-email"
+    ]
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts --format esm --dts",
+    "dev": "tsx watch src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "imapflow": "^1.0.169",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "openclaw": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsdown": "^0.12.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=22.16.0"
+  },
+  "keywords": [
+    "openclaw",
+    "email",
+    "imap",
+    "push",
+    "notifications",
+    "imap-idle",
+    "rules",
+    "telegram"
+  ],
+  "author": "canihojr",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/canihojr/bee-push-email"
+  }
+}

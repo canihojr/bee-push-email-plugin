@@ -1,0 +1,74 @@
+{
+  "version": "1",
+  "default_action": { "type": "notify" },
+  "rules": [
+    {
+      "id": "rule_example_github",
+      "name": "GitHub notifications — move and mark read",
+      "enabled": false,
+      "stop_on_match": true,
+      "match": {
+        "field": "from_domain",
+        "op": "equals",
+        "value": "github.com"
+      },
+      "actions": [
+        { "type": "mark_read" },
+        { "type": "move", "folder": "Automated/GitHub" }
+      ]
+    },
+    {
+      "id": "rule_example_wordfence",
+      "name": "Wordfence alerts — silence low severity, notify high",
+      "enabled": false,
+      "stop_on_match": true,
+      "match": {
+        "operator": "AND",
+        "conditions": [
+          { "field": "from_domain", "op": "equals", "value": "wordfence.com" },
+          { "field": "subject", "op": "not_contains", "value": "critical" }
+        ]
+      },
+      "actions": [
+        { "type": "mark_read" },
+        { "type": "move", "folder": "Automated/Wordfence" },
+        { "type": "silence" }
+      ]
+    },
+    {
+      "id": "rule_example_vip",
+      "name": "VIP sender — ask before replying",
+      "enabled": false,
+      "stop_on_match": true,
+      "match": {
+        "field": "from",
+        "op": "contains",
+        "value": "boss@company.com"
+      },
+      "actions": [
+        { "type": "notify", "template": "📨 Email from your boss: {subject}" },
+        { "type": "ask_reply", "prompt": "Email from {from} — subject: {subject}\nWant me to reply?" }
+      ]
+    },
+    {
+      "id": "rule_example_invoice",
+      "name": "Invoices — agent decides what to do",
+      "enabled": false,
+      "stop_on_match": true,
+      "match": {
+        "operator": "OR",
+        "conditions": [
+          { "field": "subject", "op": "contains", "value": "invoice" },
+          { "field": "subject", "op": "contains", "value": "factura" },
+          { "field": "subject", "op": "contains", "value": "receipt" }
+        ]
+      },
+      "actions": [
+        {
+          "type": "agent_command",
+          "message": "New invoice/receipt email from {from} — subject: {subject}. Analyze it, save key details to memory, and notify the user with a summary."
+        }
+      ]
+    }
+  ]
+}

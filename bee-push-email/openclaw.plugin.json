@@ -1,0 +1,127 @@
+{
+  "id": "bee-push-email",
+  "name": "bee-push-email",
+  "version": "2.8.8",
+  "description": "Real-time IMAP IDLE email push notifications with rule engine and guided setup wizard",
+  "builtWithOpenClawVersion": "2026.3.22",
+  "minGatewayVersion": ">=2026.3.22",
+  "pluginApiRange": ">=2026.3.22",
+  "capabilityTags": [
+    "executes-code",
+    "email:imap",
+    "email:push",
+    "rules-engine"
+  ],
+  "bundledSkills": [
+    "bee-push-email"
+  ],
+  "commandNames": [
+    "beemail",
+    "beemail_rules",
+    "beemail_rule_add",
+    "beemail_rule_toggle",
+    "beemail_rule_delete",
+    "beemail_rule_test",
+    "beemail_reconfigure",
+    "beemail_install",
+    "beemail_notif_on",
+    "beemail_notif_off",
+    "beemail_reply_off",
+    "beemail_reply_ask",
+    "beemail_reply_on"
+  ],
+  "serviceNames": [
+    "bee-push-email-imap"
+  ],
+  "hooks": [],
+  "providers": [],
+  "httpRouteCount": 0,
+  "executesCode": true,
+  "setupEntry": false,
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "host": {
+        "type": "string"
+      },
+      "port": {
+        "type": "number",
+        "default": 993
+      },
+      "ssl": {
+        "type": "boolean",
+        "default": true
+      },
+      "email": {
+        "type": "string"
+      },
+      "password": {
+        "type": "string"
+      },
+      "folder": {
+        "type": "string",
+        "default": "INBOX"
+      },
+      "preferred_channel": {
+        "type": "string",
+        "default": "telegram"
+      },
+      "rules_file": {
+        "type": "string",
+        "default": "bee-push-email-rules.json"
+      },
+      "auto_reply_mode": {
+        "type": "string",
+        "enum": [
+          "false",
+          "ask",
+          "true"
+        ],
+        "default": "false"
+      }
+    }
+  },
+  "uiHints": {
+    "host": {
+      "label": "IMAP server hostname",
+      "placeholder": "imap.gmail.com"
+    },
+    "port": {
+      "label": "IMAP port",
+      "placeholder": "993"
+    },
+    "ssl": {
+      "label": "Use SSL/TLS (recommended)"
+    },
+    "email": {
+      "label": "Email address",
+      "placeholder": "you@example.com"
+    },
+    "password": {
+      "label": "Password or app-specific password",
+      "sensitive": true
+    },
+    "folder": {
+      "label": "IMAP folder to monitor",
+      "placeholder": "INBOX"
+    },
+    "preferred_channel": {
+      "label": "Preferred notification channel",
+      "placeholder": "telegram"
+    },
+    "rules_file": {
+      "label": "Rules file path",
+      "placeholder": "bee-push-email-rules.json"
+    },
+    "auto_reply_mode": {
+      "label": "Auto-reply mode",
+      "placeholder": "false \u2014 never reply (recommended)"
+    }
+  },
+  "openclaw": {
+    "install": {
+      "npmSpec": "bee-push-email"
+    }
+  }
+}
